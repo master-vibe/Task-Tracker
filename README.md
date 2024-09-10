@@ -17,6 +17,14 @@ Task Tracker CLI is a command-line interface application built in Java that allo
 - **Java Development Kit (JDK):** Make sure you have JDK installed on your system. You can download it from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
 - **Command-Line Interface (CLI):** Use a terminal (macOS/Linux) or Command Prompt (Windows).
 
+## Getting Started
+
+Clone the repository to your local machine:
+
+```bash
+git clone https://github.com/master-vibe/Task-Tracker.git
+```
+
 ## Setup
 
 1. Clone the repository or download the source code to your local machine.
@@ -26,7 +34,7 @@ Task Tracker CLI is a command-line interface application built in Java that allo
 
 The provided batch or shell script will handle both the compilation and execution of the Java program. To use the Task CLI, follow these steps based on your operating system:
 
-### Important Note
+### Note
 
 You need to navigate to the root folder of the project where the batch (`task-cli.bat`) or shell script (`task-cli.sh`) is located. Alternatively, you can add the script to your system's PATH environment variable to run it from any location.
 

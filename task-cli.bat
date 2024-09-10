@@ -13,28 +13,25 @@ set "additionalArgs=%*"
 if not exist "%outputDir%" mkdir "%outputDir%"
 
 :: Compile if needed (check for missing directory or specific class files)
-if not exist "%outputDir%" (
-  echo Initializing...
-) else (
-  if not exist "%outputDir%\task_cli.class" (
-    if not exist "%outputDir%\TaskManager.class" (
-      if not exist "%outputDir%\Tasks.class" (
-        echo Compiling...
-        javac -d "%outputDir%" "!sourceDir!\task_cli.java" "!sourceDir!\TaskManager.java" "!sourceDir!\Tasks.java"
-        if !errorlevel! neq 0 (
-          echo Error: Compilation failed.
-          exit /b 1
-        )
-      )
+if not exist "%outputDir%" set res=true
+if not exist "%outputDir%\task_cli.class" set res=true
+if not exist "%outputDir%\TaskManager.class" set res=true
+if not exist "%outputDir%\Tasks.class" set res=true
+
+if defined res (
+    echo Initializing...
+    javac -d "%outputDir%" "!sourceDir!\task_cli.java" "!sourceDir!\TaskManager.java" "!sourceDir!\Tasks.java"
+    if !errorlevel! neq 0 (
+        echo Error: Compilation failed.
+        exit /b 1
     )
-  )
 )
 
 :: Run the Java main class with additional arguments
 java -cp "%outputDir%" "%mainClass%" %additionalArgs%
 if !errorlevel! neq 0 (
-  echo Error: Application execution failed.
-  exit /b 1
+    echo Error: Application execution failed.
+    exit /b 1
 )
 
 endlocal

@@ -45,7 +45,7 @@ Open Terminal, navigate to the project root directory, and run:
 ```bash
 ./task-cli <command> [arguments]
 ```
-##Available Commands:
+###Available Commands:
 
 Add a Task:
   Adds a new task with the given description.

@@ -1,56 +1,52 @@
 #!/bin/bash
 
-# Enable exit on error
-set -e
+# Get the script directory (works across POSIX shells)
+scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# Get the directory where the script is located
-scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# Define the sourceDir and outputDir
+# Define source and output directories
 sourceDir="$scriptDir/src"
 outputDir="$scriptDir/bin"
 specificFile="$sourceDir"
 
-# Define the main class to run (without .java or .class extension)
-mainClass="task_cli"
+# Define the main class to run
+mainClass="task_cli"  # Replace with your main class name (without extension)
 
-# Capture all additional arguments passed to the script
-additionalArgs="$@"
+# Remove trailing backslashes (if any)
+sourceDir="${sourceDir%*/}"  # More portable way for cross-platform compatibility
+outputDir="${outputDir%*/}"
 
-# Create the output directory if it does not exist
-mkdir -p "$outputDir"
+# Capture all additional arguments
+additionalArgs="$*"
 
-# Define the Java files to be compiled
-javaFiles=("$specificFile/task_cli.java" "$specificFile/Tasks.java" "$specificFile/TaskManager.java")
+# Create the output directory if it doesn't exist
+if [ ! -d "$outputDir" ]; then
+  mkdir "$outputDir"
+fi
 
-# Check if any of the Java files are newer than the class files
+# Define Java files for compilation
+javaFiles="$specificFile/task_cli.java $specificFile/Tasks.java $specificFile/TaskManager.java"
+
+# Check for newer Java files (POSIX-compliant approach)
 compileNeeded=1
-
-for javaFile in "${javaFiles[@]}"; do
-    classFile="$outputDir/$(basename "$javaFile" .java).class"
-    if [[ ! -f "$classFile" || "$javaFile" -nt "$classFile" ]]; then
-        compileNeeded=0
-        break
-    fi
+for javaFile in $javaFiles; do
+  if [[ $javaFile -nt "$outputDir/${javaFile%.java}.class" ]]; then
+    compileNeeded=0
+    break
+  fi
 done
 
 # Compile if needed
-if [[ "$compileNeeded" -eq 0 ]]; then
-    echo "Compiling Java files..."
-    javac -d "$outputDir" "${javaFiles[@]}"
-    if [[ $? -ne 0 ]]; then
-        echo "Compilation failed!"
-        exit 1
-    fi
+if [ $compileNeeded -eq 0 ]; then
+  javac -d "$outputDir" "$javaFiles"
+  if [ $? -ne 0 ]; then
+    echo "Error: Compilation failed."
+    exit 1
+  fi
 fi
 
 # Run the Java main class with additional arguments
-echo "Running $mainClass with arguments $additionalArgs..."
 java -cp "$outputDir" "$mainClass" $additionalArgs
-
-if [[ $? -ne 0 ]]; then
-    echo "Program execution failed!"
-    exit 1
+if [ $? -ne 0 ]; then
+  echo "Error: Application execution failed."
+  exit 1
 fi
-
-echo "Execution succeeded!"

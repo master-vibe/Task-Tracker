@@ -34,17 +34,23 @@ You need to navigate to the root folder of the project where the batch (`task-cl
 
 Open Command Prompt, navigate to the project root directory, and run:
 
-```bash
-task-cli <command> [arguments]
-```
+  1. Run the Script:
+      ```bash
+      task-cli <command> [arguments]
+      ```
 
 ### For MACOS:
 
 Open Terminal, navigate to the project root directory, and run:
 
-```bash
-./task-cli <command> [arguments]
-```
+  1. Change Permissions:
+      ```bash
+      chmod +x task-cli.sh
+      ```
+  2. Run the Script:
+      ```bash
+      ./task-cli.sh <command> [arguments]
+      ```
 ## Available Commands:
 
 Add a Task:

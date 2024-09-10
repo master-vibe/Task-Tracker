@@ -36,6 +36,7 @@ Open Command Prompt, navigate to the project root directory, and run:
 
 ```bash
 task-cli.bat <command> [arguments]
+```
 
 ### For MACOS:
 

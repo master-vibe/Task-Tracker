@@ -59,45 +59,7 @@ Open Terminal, navigate to the project root directory, and run:
       ```bash
       ./task-cli.sh <command> [arguments]
       ```
-## Available Commands:
 
-Add a Task:
-  Adds a new task with the given description.
-  ```bash
-  task-cli add "<description>"
-  ```
-Update a Task:
-  Updates the task with the given ID and description.
-  ```bash
-  task-cli update <ID> "<description>"
-  ```
-Delete a Task:
-  Deletes the task with the specified ID.
-  ```bash
-  task-cli delete <ID>
-  ```
-Mark a Task as In-Progress:
-  Marks the task with the specified ID as in-progress.
-  ```bash
-  task-cli mark-in-progress <ID>
-  ```
-Mark a Task as Done:
-  Marks the task with the specified ID as done.
-  ```bash
-  task-cli mark-done <ID>
-  ```
-List All Tasks:
-  Lists all tasks.
-  ```bash
-  task-cli list
-  ```
-List Tasks with Filter:
-  Lists tasks filtered by status (done, todo, in-progress).
-  ```bash
-  task-cli list <done/todo/in-progress>
-  ```
-Help:
-  Displays this help message.
-  ```bash
-  task-cli help
-  ```
+## Project Background
+  This project is part of the backend development roadmap from roadmap.sh. It serves as a practical exercise in building a CLI tool for task management, focusing on core backend concepts and Java programming skills.
+  Project Page Url : [https://roadmap.sh/projects/task-tracker](https://roadmap.sh/projects/task-tracker)
